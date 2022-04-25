@@ -5,6 +5,7 @@ import de.zooplus.pageobjects.CartPage;
 import de.zooplus.pageobjects.CheckoutOverviewPage;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
+import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -13,7 +14,7 @@ public class CartTest {
 
     @BeforeMethod(alwaysRun = true)
     public void setUp() {
-        driver = WebDriverProvider.getDriver("chrome", false);
+        driver = WebDriverProvider.getDriver("chrome", true);
         driver.manage().deleteAllCookies();
     }
 
@@ -32,5 +33,11 @@ public class CartTest {
         checkoutOverviewPage.changeShippingCountry("Portugal", "5000");
         Assert.assertEquals(checkoutOverviewPage.getSubTotalValue(), checkoutOverviewPage.calculateExpectedSubTotal());
         Assert.assertEquals(checkoutOverviewPage.getTotalValue(), checkoutOverviewPage.calculateExpectedTotal());
+    }
+
+    @AfterTest()
+    public void tearDown() {
+        driver.close();
+        driver.quit();
     }
 }
