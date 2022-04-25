@@ -151,7 +151,8 @@ public class CheckoutOverviewPage extends BasePage {
     public void changeShippingCountry(String country, String postCode) {
         driver.findElement(shippingCountryContainer).click();
         clickElementWhenClickable(shippingCountrySelector);
-        clickElementWhenClickable(portugalOption);
+        String countryOptionXpath = String.format("%s%s%s","//*[@data-label='", country, "']");
+        clickElementWhenClickable(By.xpath(countryOptionXpath));
         driver.findElement(postCodeField).sendKeys(postCode);
         clickElementWhenClickable(updateButton);
     }

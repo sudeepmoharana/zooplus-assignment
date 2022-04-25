@@ -16,6 +16,10 @@ public class WebDriverProvider {
         return (OS.indexOf("mac") >= 0);
     }
 
+    public static boolean isLinux() {
+        return (OS.indexOf("nix") >= 0);
+    }
+
     public static WebDriver getDriver(String browser, boolean isHeadless) {
         if(browser.equalsIgnoreCase("chrome")) {
             ChromeOptions chromeOptions = new ChromeOptions();
@@ -33,6 +37,9 @@ public class WebDriverProvider {
             }
             if(isWindows()) {
                 System.setProperty("webdriver.chrome.driver", DriverConstants.CHROME_DRIVER_PATH_WINDOWS);
+            }
+            if(isLinux()) {
+                System.setProperty("webdriver.chrome.driver", DriverConstants.CHROME_DRIVER_PATH_LINUX);
             }
             return new ChromeDriver(chromeOptions);
         }

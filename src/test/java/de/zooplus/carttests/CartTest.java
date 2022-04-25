@@ -1,23 +1,13 @@
 package de.zooplus.carttests;
 
-import de.zooplus.framework.config.WebDriverProvider;
+import de.zooplus.BaseTest;
+import de.zooplus.data.PostalData;
 import de.zooplus.pageobjects.CartPage;
 import de.zooplus.pageobjects.CheckoutOverviewPage;
-import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-public class CartTest {
-    private WebDriver driver;
-
-    @BeforeMethod(alwaysRun = true)
-    public void setUp() {
-        driver = WebDriverProvider.getDriver("chrome", true);
-        driver.manage().deleteAllCookies();
-    }
-
+public class CartTest extends BaseTest {
     @Test()
     public void testCart() {
         CartPage cartPage = new CartPage(driver);
@@ -30,14 +20,8 @@ public class CartTest {
         checkoutOverviewPage.removeHighestPricedArticle();
         Assert.assertEquals(checkoutOverviewPage.getSubTotalValue(), checkoutOverviewPage.calculateExpectedSubTotal());
         Assert.assertEquals(checkoutOverviewPage.getTotalValue(), checkoutOverviewPage.calculateExpectedTotal());
-        checkoutOverviewPage.changeShippingCountry("Portugal", "5000");
+        checkoutOverviewPage.changeShippingCountry(PostalData.PORTUGAL, PostalData.PORTUGAL_POSTCODE);
         Assert.assertEquals(checkoutOverviewPage.getSubTotalValue(), checkoutOverviewPage.calculateExpectedSubTotal());
         Assert.assertEquals(checkoutOverviewPage.getTotalValue(), checkoutOverviewPage.calculateExpectedTotal());
-    }
-
-    @AfterTest()
-    public void tearDown() {
-        driver.close();
-        driver.quit();
     }
 }
