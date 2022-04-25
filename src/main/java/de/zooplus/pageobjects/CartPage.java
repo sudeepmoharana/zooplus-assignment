@@ -29,7 +29,7 @@ public class CartPage extends BasePage {
 
     public CheckoutOverviewPage addAProductFromRecommendation() {
         waitForElementsToBeVisible(recommendationCardAddToCartButton);
-        JavascriptExecutor js = (JavascriptExecutor)driver;
+        JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("document.getElementsByClassName('reco-addToCart')[0].click();");
         return new CheckoutOverviewPage(driver);
     }

@@ -79,13 +79,13 @@ public class CheckoutOverviewPage extends BasePage {
                 .filter(entry -> entry.getValue().equals(finalLowestPrice))
                 .map(Map.Entry::getKey).collect(Collectors.toList());
         List<WebElement> increaseQuantityButtons = driver.findElements(increaseQuantityButton);
-        for(int i = 0; i < n; i++) {
+        for (int i = 0; i < n; i++) {
             keysForLowestPrice.stream().forEach(x -> {
                 List<WebElement> quantityInputFields = driver.findElements(quantityInputField);
                 Integer currentQuantity = Integer.valueOf(quantityInputFields.get(x).getAttribute("value"));
                 increaseQuantityButtons.get(x).click();
                 waitForPageLoad();
-                waitForElementToHaveValue(quantityInputFields.get(x), "value", String.valueOf(currentQuantity+1));
+                waitForElementToHaveValue(quantityInputFields.get(x), "value", String.valueOf(currentQuantity + 1));
             });
         }
     }
@@ -124,7 +124,7 @@ public class CheckoutOverviewPage extends BasePage {
         Double expectedSubTotal = 0.00;
 
         List<WebElement> priceContainers = driver.findElements(priceContainer);
-        for (WebElement item: priceContainers) {
+        for (WebElement item : priceContainers) {
             String price = item.getText().trim().substring(1);
             expectedSubTotal += Double.parseDouble(price);
         }
@@ -153,7 +153,7 @@ public class CheckoutOverviewPage extends BasePage {
     public void changeShippingCountry(String country, String postCode) {
         driver.findElement(shippingCountryContainer).click();
         clickElementWhenClickable(shippingCountrySelector);
-        String countryOptionXpath = String.format("%s%s%s","//*[@data-label='", country, "']");
+        String countryOptionXpath = String.format("%s%s%s", "//*[@data-label='", country, "']");
         clickElementWhenClickable(By.xpath(countryOptionXpath));
         driver.findElement(postCodeField).sendKeys(postCode);
         clickElementWhenClickable(updateButton);

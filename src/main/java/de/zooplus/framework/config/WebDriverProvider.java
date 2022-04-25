@@ -23,9 +23,9 @@ public class WebDriverProvider {
     }
 
     public static WebDriver getDriver(String browser, boolean isHeadless) {
-        if(browser.equalsIgnoreCase("chrome")) {
+        if (browser.equalsIgnoreCase("chrome")) {
             ChromeOptions chromeOptions = new ChromeOptions();
-            if(isHeadless) {
+            if (isHeadless) {
                 chromeOptions.addArguments("--headless");
                 chromeOptions.addArguments("--window-size=1440,900");
                 chromeOptions.addArguments("--disable-gpu");
@@ -34,21 +34,21 @@ public class WebDriverProvider {
             } else {
                 chromeOptions.addArguments("--start-maximized");
             }
-            if(isMac()) {
+            if (isMac()) {
                 System.setProperty("webdriver.chrome.driver", DriverConstants.CHROME_DRIVER_PATH_MAC);
             }
-            if(isWindows()) {
+            if (isWindows()) {
                 System.setProperty("webdriver.chrome.driver", DriverConstants.CHROME_DRIVER_PATH_WINDOWS);
             }
-            if(isLinux()) {
+            if (isLinux()) {
                 System.setProperty("webdriver.chrome.driver", DriverConstants.CHROME_DRIVER_PATH_LINUX);
             }
             return new ChromeDriver(chromeOptions);
         }
 
-        if(browser.equalsIgnoreCase("firefox")) {
+        if (browser.equalsIgnoreCase("firefox")) {
             FirefoxOptions firefoxOptions = new FirefoxOptions();
-            if(isHeadless) {
+            if (isHeadless) {
                 firefoxOptions.addArguments("--headless");
                 firefoxOptions.addArguments("--window-size=1440,900");
                 firefoxOptions.addArguments("--disable-gpu");
@@ -57,13 +57,13 @@ public class WebDriverProvider {
             } else {
                 firefoxOptions.addArguments("--start-maximized");
             }
-            if(isMac()) {
+            if (isMac()) {
                 System.setProperty("webdriver.gecko.driver", DriverConstants.FIREFOX_DRIVER_PATH_MAC);
             }
-            if(isWindows()) {
+            if (isWindows()) {
                 System.setProperty("webdriver.gecko.driver", DriverConstants.FIREFOX_DRIVER_PATH_WINDOWS);
             }
-            if(isLinux()) {
+            if (isLinux()) {
                 System.setProperty("webdriver.gecko.driver", DriverConstants.FIREFOX_DRIVER_PATH_LINUX);
             }
             return new FirefoxDriver(firefoxOptions);

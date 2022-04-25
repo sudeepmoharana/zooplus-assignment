@@ -8,7 +8,8 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class CartTest extends BaseTest {
-    @Test()
+    @Test(groups = {"smoke", "regression"},
+            description = "This test validates the steps mentioned in the automation assignement")
     public void testCart() {
         CartPage cartPage = new CartPage(driver);
         cartPage.open();

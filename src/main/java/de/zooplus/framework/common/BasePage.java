@@ -32,6 +32,7 @@ public class BasePage {
         wait.until(webDriver -> "complete".equals(((JavascriptExecutor) webDriver)
                 .executeScript("return document.readyState")));
     }
+
     protected WebElement findElement(By by) {
         WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(by));
         return element;
@@ -56,6 +57,7 @@ public class BasePage {
     protected void waitForElementToHaveValue(WebElement element, String attribute, String text) {
         wait.until(ExpectedConditions.attributeToBe(element, attribute, text));
     }
+
     protected boolean isConsentPopupDisplayed() {
         try {
             findElement(consentPopup);
@@ -67,10 +69,10 @@ public class BasePage {
     }
 
     protected void handleConsentPopup(boolean acceptCookies) {
-        if(!isConsentPopupDisplayed()) {
+        if (!isConsentPopupDisplayed()) {
             return;
         }
-        if(acceptCookies) {
+        if (acceptCookies) {
             findElement(acceptCookiesButton).click();
         } else {
             findElement(rejectCookiesButton).click();

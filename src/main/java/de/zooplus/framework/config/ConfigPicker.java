@@ -42,7 +42,7 @@ public class ConfigPicker {
     }
 
     public static ConfigPicker getInstance() {
-        if(configPicker == null) {
+        if (configPicker == null) {
             return new ConfigPicker();
         }
         return configPicker;
