@@ -4,6 +4,8 @@ import de.zooplus.framework.constants.DriverConstants;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
 
 public class WebDriverProvider {
     private static String OS = System.getProperty("os.name").toLowerCase();
@@ -43,6 +45,30 @@ public class WebDriverProvider {
             }
             return new ChromeDriver(chromeOptions);
         }
+
+        if(browser.equalsIgnoreCase("firefox")) {
+            FirefoxOptions firefoxOptions = new FirefoxOptions();
+            if(isHeadless) {
+                firefoxOptions.addArguments("--headless");
+                firefoxOptions.addArguments("--window-size=1440,900");
+                firefoxOptions.addArguments("--disable-gpu");
+                firefoxOptions.addArguments("--allow-insecure-localhost");
+                firefoxOptions.addArguments("--no-sandbox");
+            } else {
+                firefoxOptions.addArguments("--start-maximized");
+            }
+            if(isMac()) {
+                System.setProperty("webdriver.gecko.driver", DriverConstants.FIREFOX_DRIVER_PATH_MAC);
+            }
+            if(isWindows()) {
+                System.setProperty("webdriver.gecko.driver", DriverConstants.FIREFOX_DRIVER_PATH_WINDOWS);
+            }
+            if(isLinux()) {
+                System.setProperty("webdriver.gecko.driver", DriverConstants.FIREFOX_DRIVER_PATH_LINUX);
+            }
+            return new FirefoxDriver(firefoxOptions);
+        }
+
         return null;
     }
 }
