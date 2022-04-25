@@ -50,8 +50,10 @@ public class CheckoutOverviewPage extends BasePage {
     public boolean doesUrlContainKeyword() {
         if (isCheckoutOverviewPageLoaded()) {
             String currentUrl = driver.getCurrentUrl();
+            log.info("Current url is: {}", currentUrl);
             return currentUrl.contains("overview");
         } else {
+            log.error("Current url is: {}", driver.getCurrentUrl());
             return false;
         }
     }
